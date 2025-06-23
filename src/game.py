@@ -93,7 +93,7 @@ def difficulty():
 
 def inputCoord(board_size: int) -> tuple[int, int]:
     while True:
-        coord = input('\nDigite a coordenada (ex: A5): ').strip().upper()
+        coord = input('\n\x1b[KDigite a coordenada (ex: A5): ').strip().upper()
 
         if len(coord) < 2 or not coord[0].isalpha() or not coord[1:].isdigit():
             print("\033[91mFormato inválido. Use algo como A5.\033[0m\x1B[3A")
