@@ -119,6 +119,7 @@ def mainLoop(visible_board: list[list], board_size: int, ships: list[dict], ship
 
         print('\x1b[s', end='')
         print(f'\x1b[3;{board_size*4}H\x1b[32mTentativas restantes: {attemps}\x1b[0m', end='')
+        print(f'\x1b[5;{board_size*4}H\x1b[32mNavios destruidos: {destroyeds}\x1b[0m', end='')
         print('\x1b[u', end='')
         
         x, y = inputCoord(board_size)
@@ -130,8 +131,6 @@ def mainLoop(visible_board: list[list], board_size: int, ships: list[dict], ship
         board.updateBoard(visible_board, ships)
 
         destroyeds = mv.destroyedShips(ships)
-        print(f'\x1b[5;{board_size*4}H\x1b[32mNavios destruidos: {destroyeds}\x1b[0m', end='')
-        print('\x1b[u', end='')
         attemps -= 1
 
         if mv.isVictory(ships):
