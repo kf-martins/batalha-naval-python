@@ -1,3 +1,5 @@
+from app import ship
+
 def createBoard(size: int = 10, ships: list[dict] = None) -> list[list[str]]:
     board = [["~" for _ in range(size)] for _ in range(size)]
     ships_board = [["~" for _ in range(size)] for _ in range(size)]
@@ -24,3 +26,11 @@ def createBoard(size: int = 10, ships: list[dict] = None) -> list[list[str]]:
                 ocupados.add((px, py))
 
     return board, ships_board
+
+def updateBoard(visible_board: list[list], ships: list[dict]):
+    for s in ships:
+        if s['destroyed']:
+            positions = ship.getShipPos(s['pos'], s['direction'], s['size'])
+            # [visible_board[y][x] == '+' for x, y in positions]
+            for x, y in positions:
+                visible_board[y][x] = '+'

@@ -7,6 +7,9 @@ import random
 # used_letters = set()
 occup_pos = set()
 
+def resetStats():
+    occup_pos = set()
+
 def createShip(name: str, size: int, pos: tuple[int, int] = None, direction: int = None, letter: str = None, board_size: int = 10) -> dict:
     """Retorna um dicionario com as informações do naivo"""
     if not letter.isalpha() or letter == 'X':
@@ -37,7 +40,7 @@ def createShip(name: str, size: int, pos: tuple[int, int] = None, direction: int
             raise ValueError(f'Posição {p} já ocupada por outro navio')
         occup_pos.add(p)
 
-    return {"name": name, "size": size, "pos": pos, 'direction': direction, 'letter': letter}
+    return {"name": name, "size": size, "pos": pos, 'direction': direction, 'letter': letter, 'destroyed': False}
 
 def getShipPos(pos: tuple[int, int], direction: int, size: int) -> list[tuple[int, int]]:
     """Retorna todas as posições ocupadas por um navio dado a posição inicial, direção e tamanho."""
@@ -49,6 +52,17 @@ def getShipPos(pos: tuple[int, int], direction: int, size: int) -> list[tuple[in
         else:
             positions.append((x, y + i))
     return positions
+
+def updateShip(ship: dict, board: list[list]):
+    if not ship.get('destroyed', False):
+        positions = getShipPos(ship['pos'], ship['direction'], ship['size'])
+        if all(board[y][x] == 'X' for x, y in positions):
+            ship['destroyed'] = True
+
+def updateShips(ships: list[dict], board: list[list]):
+    for ship in ships:
+        updateShip(ship, board)
+
 
 def randomPos(size: int, direction: int, board_size: int): 
     """Retorna uma tupla com uma posição x e y aleatória"""

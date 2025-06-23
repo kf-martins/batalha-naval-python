@@ -1,27 +1,31 @@
-from game import board, ship
+from app import game
 
-tamanho_tabuleiro = 10
+if __name__ == '__main__':
+    
+    running = True
+    while running:
+        debug = False
+        tamanho_tabuleiro = 10
 
-navios = [
-    ship.createShip("Porta-aviões", 5, letter='P', board_size=tamanho_tabuleiro),
-    ship.createShip("Navio de batalha", 4, letter='N', board_size=tamanho_tabuleiro),
-    ship.createShip("Cruzador", 3, letter='C', board_size=tamanho_tabuleiro),
-    ship.createShip("Destruirdor", 2, letter='D', board_size=tamanho_tabuleiro),
-    ship.createShip("Destruirdor", 2, letter='D', board_size=tamanho_tabuleiro),
-    ship.createShip("Submarino", 1, letter='S', board_size=tamanho_tabuleiro),
-    ship.createShip("Submarino", 1, letter='S', board_size=tamanho_tabuleiro)
-]
+        navios = [
+            game.ship.createShip("Porta-aviões", 5, letter='P', board_size=tamanho_tabuleiro),
+            game.ship.createShip("Navio de batalha", 4, letter='N', board_size=tamanho_tabuleiro),
+            game.ship.createShip("Cruzador", 3, letter='C', board_size=tamanho_tabuleiro),
+            game.ship.createShip("Destruirdor", 2, letter='D', board_size=tamanho_tabuleiro),
+            game.ship.createShip("Destruirdor", 2, letter='D', board_size=tamanho_tabuleiro),
+            game.ship.createShip("Submarino", 1, letter='S', board_size=tamanho_tabuleiro),
+            game.ship.createShip("Submarino", 1, letter='S', board_size=tamanho_tabuleiro)
+        ]
 
+        tabuleiro, tab_navios = game.board.createBoard(tamanho_tabuleiro, navios)
 
-tabuleiro, tab_navios = board.createBoard(tamanho_tabuleiro, navios)
+        game.clearScreen()
+        tentativas = game.mv.defineDifficulty(game.difficulty())
+        win = game.mainLoop(tabuleiro, tamanho_tabuleiro, navios, tab_navios, tentativas)
 
-tabuleiro = board.markBomb(tabuleiro, tab_navios, (2,1))
+        if win:
+            game.printVictory()
+        else:
+            game.printGameOver()
 
-for y in range(tamanho_tabuleiro):
-    print("  ".join(tabuleiro[y]))
-print()
-for y in range(tamanho_tabuleiro):
-    print("  ".join(tab_navios[y]))
-print()
-
-
+        running = game.askRetry()
