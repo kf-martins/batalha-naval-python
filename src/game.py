@@ -96,14 +96,14 @@ def inputCoord(board_size: int) -> tuple[int, int]:
         coord = input('\nDigite a coordenada (ex: A5): ').strip().upper()
 
         if len(coord) < 2 or not coord[0].isalpha() or not coord[1:].isdigit():
-            print("\033[91mFormato inválido. Use algo como A5.\033[0m\x1B[2A")
+            print("\033[91mFormato inválido. Use algo como A5.\033[0m\x1B[3A")
             continue
 
         x = colLetterToIndex(coord[0])
         y = int(coord[1:]) - 1
 
         if x < 0 or x >= board_size or y < 0 or y >= board_size:
-            print(f"\033[91mCoordenada fora do tabuleiro. Use A1 até {chr(ord('A')+board_size-1)}{board_size}.\033[0m\x1B[2A")
+            print(f"\033[91mCoordenada fora do tabuleiro. Use A1 até {chr(ord('A')+board_size-1)}{board_size}.\033[0m\x1B[3A")
             continue
 
         return x, y
