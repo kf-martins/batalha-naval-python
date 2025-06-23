@@ -124,7 +124,7 @@ def mainLoop(visible_board: list[list], board_size: int, ships: list[dict], ship
         
         x, y = inputCoord(board_size)
         while not mv.bomb(x, y, visible_board, ships_board):
-            print("\033[91mEssa posição é repetida.\033[0m\x1B[2A")
+            print("\033[91mEssa posição é repetida.\033[0m\x1B[3A")
             x, y = inputCoord(board_size)
 
         ship.updateShips(ships, visible_board)
