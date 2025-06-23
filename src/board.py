@@ -1,4 +1,4 @@
-from app import ship
+from src import ship
 
 def createBoard(size: int = 10, ships: list[dict] = None) -> list[list[str]]:
     board = [["~" for _ in range(size)] for _ in range(size)]

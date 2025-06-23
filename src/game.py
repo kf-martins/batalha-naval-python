@@ -1,5 +1,5 @@
-from app import board, ship
-from app import move_and_rules as mv
+from src import board, ship
+from src import move_and_rules as mv
 
 debug = False
 
